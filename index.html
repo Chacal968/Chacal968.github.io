@@ -2,28 +2,155 @@
 <html lang="es">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Tabla de Clasificación</title>
-<style>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  table, th, td {
-    border: 1px solid black;
-  }
-  th, td {
-    padding: 8px;
-    text-align: left;
-  }
-  th {
-    background-color: #f2f2f2;
-  }
-</style>
 <script>
   function refre(){
       location.reload();
   }
   setInterval(refre, 60000); 
+
+// Supongamos que tienes elementos con la clase "miClase"
+var elementos = document.getElementsByClassName("dataframe");
+
+// Itera sobre los elementos
+for (var i = 0; i < elementos.length; i++) {
+    // Agrega una propiedad id a cada elemento
+    elementos[i].id = "tabla";
+}
+
+
+  var tabla0 = document.getElementsByClassName("tabla");
+
+// Accede al primer encabezado (th) de la primera fila (tr)
+var encabezado = tabla0.rows[0].cells[0];
+
+// Modifica el contenido del encabezado
+encabezado.innerHTML = "No";
+
+  function ordenarTabla(n) {
+      var tabla = document.getElementsByClassName("dataframe");
+      var filas = Array.prototype.slice.call(tabla.rows, 2);
+
+      filas.sort(function (a, b) {
+          var valorA = a.cells[n].innerText;
+          var valorB = b.cells[n].innerText;
+
+          return valorB - valorA;
+      });
+
+      for (var i = 0; i < filas.length; i++) {
+          tabla.appendChild(filas[i]);
+      }
+  }
+
+
+  window.onload = function () {
+      var encabezados = document.querySelectorAll("#tabla th");
+
+      var tabla = document.getElementsByClassName("dataframe");
+      var filas = Array.from(tabla.rows).slice(2);
+
+      filas.forEach(function (fila, index) {
+          tabla.tBodies[0].appendChild(fila);
+
+          if (index === 3 || index === 14) {
+              fila.style.borderBottom = "3px solid red";
+          }
+      });
+
+      encabezados.forEach(function (encabezado, index) {
+
+          if (index >= 5 && index < 14) {
+              encabezado.addEventListener("click", function () {
+                  encabezados.forEach(function (encabezado) {
+                      encabezado.style.background = "";
+                  });
+                  //Limpiar---------------------------------------
+                  var tabla2 = document.getElementsByClassName("dataframe");
+                  var filas2 = Array.from(tabla2.rows).slice(2);
+
+                  filas2.forEach(function (fila, index) {
+                      tabla2.tBodies[0].appendChild(fila);
+
+                      fila.style.borderBottom = "";
+                  });
+                  ////Limpiar---------------------------------------
+                  encabezado.style.background = "linear-gradient(to right, #0f2027, #203a43, #2c5364)";
+
+                  ordenarTabla(index);
+              });
+          }
+          else if (index === 14) {
+              encabezado.addEventListener("click", function () {
+                  encabezados.forEach(function (encabezado) {
+                      encabezado.style.background = "";
+                  });
+
+                  //Pintar---------------------------------------
+                  var tabla2 = document.getElementsByClassName("dataframe");
+                  var filas2 = Array.from(tabla2.rows).slice(2);
+
+                  filas2.forEach(function (fila, index) {
+                      tabla2.tBodies[0].appendChild(fila);
+
+                      if (index === 3 || index === 14) {
+                          fila.style.borderBottom = "3px solid red";
+                      }
+                  });
+                  ////Pintar---------------------------------------
+
+                  encabezado.style.background = "linear-gradient(to right, #0f2027, #203a43, #2c5364)";
+
+                  ordenarTabla(index);
+              });
+          }
+          /*else if (index == 14)
+          {
+              encabezado.addEventListener("click", function() {
+              encabezados.forEach(function(encabezado) {
+                encabezado.style.background = "";
+              });
+      
+              encabezado.style.background = "linear-gradient(to right, #0f2027, #203a43, #2c5364)";
+      
+              ordenarTabla(index);
+            });
+          }*/
+      });
+  };
+
+
 </script>
+<style>
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #333;
+      color: #fff;
+  }
+
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  }
+
+  table td:nth-child(15) {
+      background: linear-gradient(to right, #012863, #016363);
+  }
+
+  th,
+  td {
+      padding: 10px;
+      border: 1px solid #fff;
+      text-align: left;
+  }
+
+  /*tr:nth-child(4) td {
+border-bottom: 3px solid red;
+}
+tr:nth-child(15) td {
+border-bottom: 3px solid red;
+}*/
+</style>
 </head>
 <body>
   <h2>By Ernesto Duardo</h2>
@@ -68,8 +195,8 @@
       <td>205</td>
       <td>103</td>
       <td>120</td>
-      <td>0</td>
-      <td>1319</td>
+      <td>107</td>
+      <td>1426</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -89,36 +216,15 @@
       <td>168</td>
       <td>73</td>
       <td>67</td>
-      <td>0</td>
-      <td>1220</td>
+      <td>55</td>
+      <td>1275</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
-      <td>99</td>
+      <td>151</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>3</td>
-      <td>Francis José Rodríguez Ronda</td>
-      <td>12mo</td>
-      <td>LT</td>
-      <td>214</td>
-      <td>150</td>
-      <td>30</td>
-      <td>123</td>
-      <td>212</td>
-      <td>123</td>
-      <td>147</td>
-      <td>78</td>
-      <td>0</td>
-      <td>1077</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>143</td>
-    </tr>
-    <tr>
-      <th>4</th>
       <td>5</td>
       <td>Maité Morales Carreras</td>
       <td>10mo</td>
@@ -131,12 +237,33 @@
       <td>153</td>
       <td>61</td>
       <td>67</td>
-      <td>0</td>
-      <td>1031</td>
+      <td>96</td>
+      <td>1127</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
-      <td>46</td>
+      <td>148</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3</td>
+      <td>Francis José Rodríguez Ronda</td>
+      <td>12mo</td>
+      <td>LT</td>
+      <td>214</td>
+      <td>150</td>
+      <td>30</td>
+      <td>123</td>
+      <td>212</td>
+      <td>123</td>
+      <td>147</td>
+      <td>78</td>
+      <td>49</td>
+      <td>1126</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>5</th>
@@ -152,12 +279,12 @@
       <td>102</td>
       <td>113</td>
       <td>72</td>
-      <td>0</td>
-      <td>697</td>
-      <td>334</td>
+      <td>55</td>
+      <td>752</td>
+      <td>374</td>
       <td>-</td>
       <td>-</td>
-      <td>334</td>
+      <td>374</td>
     </tr>
     <tr>
       <th>6</th>
@@ -173,12 +300,12 @@
       <td>153</td>
       <td>17</td>
       <td>36</td>
-      <td>0</td>
-      <td>695</td>
-      <td>336</td>
+      <td>13</td>
+      <td>708</td>
+      <td>418</td>
       <td>-</td>
       <td>-</td>
-      <td>2</td>
+      <td>44</td>
     </tr>
     <tr>
       <th>7</th>
@@ -194,15 +321,36 @@
       <td>7</td>
       <td>113</td>
       <td>25</td>
-      <td>0</td>
-      <td>679</td>
-      <td>352</td>
+      <td>7</td>
+      <td>686</td>
+      <td>440</td>
       <td>-</td>
       <td>-</td>
-      <td>16</td>
+      <td>22</td>
     </tr>
     <tr>
       <th>8</th>
+      <td>16</td>
+      <td>Adriàn Pacheco Rubio</td>
+      <td>12mo</td>
+      <td>MT</td>
+      <td>114</td>
+      <td>47</td>
+      <td>107</td>
+      <td>74</td>
+      <td>150</td>
+      <td>7</td>
+      <td>44</td>
+      <td>49</td>
+      <td>58</td>
+      <td>650</td>
+      <td>476</td>
+      <td>-</td>
+      <td>-</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>9</th>
       <td>11</td>
       <td>Roger Peña Pérez</td>
       <td>12mo</td>
@@ -217,13 +365,13 @@
       <td>49</td>
       <td>0</td>
       <td>649</td>
-      <td>382</td>
+      <td>477</td>
       <td>-</td>
       <td>-</td>
-      <td>30</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>10</th>
       <td>4</td>
       <td>Zaniel Garcia Orihuela</td>
       <td>10mo</td>
@@ -236,15 +384,15 @@
       <td>46</td>
       <td>0</td>
       <td>42</td>
-      <td>0</td>
-      <td>634</td>
-      <td>397</td>
+      <td>7</td>
+      <td>641</td>
+      <td>485</td>
       <td>-</td>
       <td>-</td>
-      <td>15</td>
+      <td>8</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>11</th>
       <td>18</td>
       <td>Sergio Jorge Montero López</td>
       <td>12mo</td>
@@ -257,36 +405,36 @@
       <td>37</td>
       <td>30</td>
       <td>36</td>
-      <td>0</td>
-      <td>602</td>
-      <td>429</td>
+      <td>12</td>
+      <td>614</td>
+      <td>512</td>
       <td>-</td>
       <td>-</td>
-      <td>32</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>16</td>
-      <td>Adriàn Pacheco Rubio</td>
-      <td>12mo</td>
-      <td>MT</td>
-      <td>114</td>
-      <td>47</td>
-      <td>107</td>
-      <td>74</td>
-      <td>150</td>
-      <td>7</td>
-      <td>44</td>
-      <td>49</td>
-      <td>0</td>
-      <td>592</td>
-      <td>439</td>
-      <td>-</td>
-      <td>-</td>
-      <td>10</td>
+      <td>27</td>
     </tr>
     <tr>
       <th>12</th>
+      <td>22</td>
+      <td>César Raúl Luis González</td>
+      <td>11no</td>
+      <td>MT</td>
+      <td>100</td>
+      <td>110</td>
+      <td>123</td>
+      <td>51</td>
+      <td>150</td>
+      <td>7</td>
+      <td>13</td>
+      <td>0</td>
+      <td>40</td>
+      <td>594</td>
+      <td>532</td>
+      <td>-</td>
+      <td>-</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>13</th>
       <td>6</td>
       <td>Karel A. González Zaldivar</td>
       <td>12mo</td>
@@ -301,28 +449,7 @@
       <td>18</td>
       <td>0</td>
       <td>574</td>
-      <td>457</td>
-      <td>-</td>
-      <td>-</td>
-      <td>18</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>22</td>
-      <td>César Raúl Luis González</td>
-      <td>11no</td>
-      <td>MT</td>
-      <td>100</td>
-      <td>110</td>
-      <td>123</td>
-      <td>51</td>
-      <td>150</td>
-      <td>7</td>
-      <td>13</td>
-      <td>0</td>
-      <td>0</td>
-      <td>554</td>
-      <td>477</td>
+      <td>552</td>
       <td>-</td>
       <td>-</td>
       <td>20</td>
@@ -341,36 +468,15 @@
       <td>63</td>
       <td>26</td>
       <td>36</td>
-      <td>0</td>
-      <td>539</td>
-      <td>492</td>
+      <td>9</td>
+      <td>548</td>
+      <td>578</td>
       <td>-</td>
       <td>-</td>
-      <td>15</td>
+      <td>26</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>19</td>
-      <td>Ernesto Duardo Rodríguez</td>
-      <td>11no</td>
-      <td>SS</td>
-      <td>100</td>
-      <td>56</td>
-      <td>30</td>
-      <td>50</td>
-      <td>128</td>
-      <td>100</td>
-      <td>0</td>
-      <td>42</td>
-      <td>0</td>
-      <td>506</td>
-      <td>525</td>
-      <td>-</td>
-      <td>-</td>
-      <td>33</td>
-    </tr>
-    <tr>
-      <th>16</th>
       <td>12</td>
       <td>Chistopher Jesús Constantín Pérez</td>
       <td>11no</td>
@@ -383,12 +489,33 @@
       <td>53</td>
       <td>0</td>
       <td>90</td>
-      <td>0</td>
-      <td>503</td>
-      <td>528</td>
-      <td>3</td>
+      <td>27</td>
+      <td>530</td>
+      <td>596</td>
       <td>-</td>
-      <td>3</td>
+      <td>-</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>19</td>
+      <td>Ernesto Duardo Rodríguez</td>
+      <td>11no</td>
+      <td>SS</td>
+      <td>100</td>
+      <td>56</td>
+      <td>30</td>
+      <td>50</td>
+      <td>128</td>
+      <td>100</td>
+      <td>0</td>
+      <td>42</td>
+      <td>15</td>
+      <td>521</td>
+      <td>605</td>
+      <td>9</td>
+      <td>-</td>
+      <td>9</td>
     </tr>
     <tr>
       <th>17</th>
@@ -406,10 +533,10 @@
       <td>36</td>
       <td>0</td>
       <td>466</td>
-      <td>565</td>
-      <td>40</td>
+      <td>660</td>
+      <td>64</td>
       <td>-</td>
-      <td>37</td>
+      <td>55</td>
     </tr>
     <tr>
       <th>18</th>
@@ -427,8 +554,8 @@
       <td>65</td>
       <td>0</td>
       <td>403</td>
-      <td>628</td>
-      <td>103</td>
+      <td>723</td>
+      <td>127</td>
       <td>-</td>
       <td>63</td>
     </tr>
@@ -448,8 +575,8 @@
       <td>18</td>
       <td>0</td>
       <td>388</td>
-      <td>643</td>
-      <td>118</td>
+      <td>738</td>
+      <td>142</td>
       <td>-</td>
       <td>15</td>
     </tr>
@@ -469,8 +596,8 @@
       <td>18</td>
       <td>0</td>
       <td>386</td>
-      <td>645</td>
-      <td>120</td>
+      <td>740</td>
+      <td>144</td>
       <td>-</td>
       <td>2</td>
     </tr>
@@ -488,12 +615,12 @@
       <td>15</td>
       <td>30</td>
       <td>42</td>
-      <td>0</td>
-      <td>342</td>
-      <td>689</td>
-      <td>164</td>
+      <td>12</td>
+      <td>354</td>
+      <td>772</td>
+      <td>176</td>
       <td>-</td>
-      <td>44</td>
+      <td>32</td>
     </tr>
     <tr>
       <th>22</th>
@@ -511,10 +638,10 @@
       <td>29</td>
       <td>0</td>
       <td>284</td>
-      <td>747</td>
-      <td>222</td>
+      <td>842</td>
+      <td>246</td>
       <td>-</td>
-      <td>58</td>
+      <td>70</td>
     </tr>
     <tr>
       <th>23</th>
@@ -532,8 +659,8 @@
       <td>11</td>
       <td>0</td>
       <td>267</td>
-      <td>764</td>
-      <td>239</td>
+      <td>859</td>
+      <td>263</td>
       <td>17</td>
       <td>17</td>
     </tr>
@@ -553,8 +680,8 @@
       <td>0</td>
       <td>0</td>
       <td>194</td>
-      <td>837</td>
-      <td>312</td>
+      <td>932</td>
+      <td>336</td>
       <td>90</td>
       <td>73</td>
     </tr>
@@ -574,8 +701,8 @@
       <td>0</td>
       <td>0</td>
       <td>184</td>
-      <td>847</td>
-      <td>322</td>
+      <td>942</td>
+      <td>346</td>
       <td>100</td>
       <td>10</td>
     </tr>
@@ -595,8 +722,8 @@
       <td>0</td>
       <td>0</td>
       <td>179</td>
-      <td>852</td>
-      <td>327</td>
+      <td>947</td>
+      <td>351</td>
       <td>105</td>
       <td>5</td>
     </tr>
@@ -616,8 +743,8 @@
       <td>0</td>
       <td>0</td>
       <td>143</td>
-      <td>888</td>
-      <td>363</td>
+      <td>983</td>
+      <td>387</td>
       <td>141</td>
       <td>36</td>
     </tr>
@@ -637,8 +764,8 @@
       <td>0</td>
       <td>0</td>
       <td>124</td>
-      <td>907</td>
-      <td>382</td>
+      <td>1002</td>
+      <td>406</td>
       <td>160</td>
       <td>19</td>
     </tr>
@@ -658,8 +785,8 @@
       <td>0</td>
       <td>0</td>
       <td>79</td>
-      <td>952</td>
-      <td>427</td>
+      <td>1047</td>
+      <td>451</td>
       <td>205</td>
       <td>45</td>
     </tr>
@@ -679,8 +806,8 @@
       <td>0</td>
       <td>0</td>
       <td>44</td>
-      <td>987</td>
-      <td>462</td>
+      <td>1082</td>
+      <td>486</td>
       <td>240</td>
       <td>35</td>
     </tr>
@@ -700,8 +827,8 @@
       <td>0</td>
       <td>0</td>
       <td>40</td>
-      <td>991</td>
-      <td>466</td>
+      <td>1086</td>
+      <td>490</td>
       <td>244</td>
       <td>4</td>
     </tr>
@@ -721,8 +848,8 @@
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1031</td>
-      <td>506</td>
+      <td>1126</td>
+      <td>530</td>
       <td>284</td>
       <td>40</td>
     </tr>
