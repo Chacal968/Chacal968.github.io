@@ -766,7 +766,7 @@ border-bottom: 3px solid red;
       filas.forEach(function (fila, index) {
           tabla.tBodies[0].appendChild(fila);
 
-          if (index === 3 || index === 14) {
+          if (index === 2 || index === 13) {
               fila.style.borderBottom = "3px solid red";
           }
       });
@@ -798,7 +798,7 @@ border-bottom: 3px solid red;
                   encabezados.forEach(function (encabezado) {
                       encabezado.style.background = "";
                   });
-
+                  ordenarTabla(index);
                   //Pintar---------------------------------------
                   var tabla2 = document.getElementById("tabla");
                   var filas2 = Array.from(tabla2.rows).slice(2);
@@ -806,15 +806,13 @@ border-bottom: 3px solid red;
                   filas2.forEach(function (fila, index) {
                       tabla2.tBodies[0].appendChild(fila);
 
-                      if (index === 3 || index === 14) {
+                      if (index === 2 || index === 13) {
                           fila.style.borderBottom = "3px solid red";
                       }
                   });
                   ////Pintar---------------------------------------
 
                   encabezado.style.background = "linear-gradient(to right, #0f2027, #203a43, #2c5364)";
-
-                  ordenarTabla(index);
               });
           }
       });
